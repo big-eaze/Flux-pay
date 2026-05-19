@@ -42,4 +42,4 @@ next-env.d.ts
 
 
 #exempted page
-.landing.tsx
+.landing.old.tsx
