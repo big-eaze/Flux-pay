@@ -5,7 +5,7 @@ import {
   Shield, TrendingUp, ArrowRightLeft, CreditCard, Lock, Wallet,
   ChevronRight, Bitcoin, ArrowRight, Eye, EyeOff, Globe, CheckCircle2,
 } from "lucide-react";
-import Header from "./components/layout/GuestHeader";
+import Header from "./app/components/layout/GuestHeader";
 import { useRouter } from "next/navigation";
 
 const ACCENT = "#f7931a";
