@@ -1,6 +1,5 @@
 "use client";
-
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Bitcoin, ChevronDown, Wallet, ArrowRightLeft,
   CheckCircle2, CreditCard, X,
@@ -124,11 +123,12 @@ function CountrySelect({
   const ref = useRef<HTMLDivElement>(null);
 
   // Close on outside click
-  useMemo(() => {
+  useEffect(() => {
     function handle(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
-    if (open) document.addEventListener("mousedown", handle);
+    if (!open) return;
+    document.addEventListener("mousedown", handle);
     return () => document.removeEventListener("mousedown", handle);
   }, [open]);
 
@@ -165,7 +165,7 @@ function CountrySelect({
             }}
           >
             {/* Scrollable wrapper */}
-            <div className="max-h-[320px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+            <div className="max-h-80 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
               {COUNTRIES.map((c, i) => (
                 <button
                   key={i + 1}
@@ -240,7 +240,7 @@ export default function BuyBitcoinPage() {
     <div className="min-h-screen bg-[#0a0a0f] text-white">
       <Header />
 
-      <main className="max-w-[1400px] mx-auto px-5 lg:px-10 pt-28 pb-24">
+      <main className="max-w-350 mx-auto px-5 lg:px-10 pt-28 pb-24">
         <div className="grid lg:grid-cols-[1fr_480px] gap-12 items-start">
 
           {/* ── LEFT: Hero ── */}
@@ -389,7 +389,7 @@ export default function BuyBitcoinPage() {
                 <div>
                   <p className="text-sm font-semibold mb-1">Secure Checkout</p>
                   <p className="text-xs text-white/45 leading-relaxed">
-                    You'll be redirected to our secure payment gateway. Your card details are never stored on our servers.
+                    You&apos;ll be redirected to our secure payment gateway. Your card details are never stored on our servers.
                   </p>
                 </div>
               </div>

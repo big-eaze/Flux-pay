@@ -12,10 +12,10 @@ import {
   XCircle,
   Loader2,
 } from "lucide-react";
-import Header from "../components/layout/header";
-import { THEME } from "../constants/theme";
+import Header from "../../components/layout/header";
+import { THEME } from "../../constants/theme";
 import { useState } from "react";
-import Footer from "../components/layout/footer";
+import Footer from "../../components/layout/footer";
 
 export default function TransactionsPage() {
   const ACCENT = THEME.accent;

@@ -14,9 +14,9 @@ import {
   Send,
 } from "lucide-react";
 import { useState } from "react";
-import Header from "../components/layout/header";
-import { THEME } from "../constants/theme";
-import Footer from "../components/layout/footer";
+import Header from "../../components/layout/header";
+import { THEME } from "../../constants/theme";
+import Footer from "../../components/layout/footer";
 
 export default function SupportPage() {
   const ACCENT = THEME.accent;

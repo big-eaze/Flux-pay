@@ -10,8 +10,8 @@ import {
   Mail,
   Shield,
 } from "lucide-react";
-import Header from "../components/layout/header";
-import { THEME } from "../constants/theme";
+import Header from "../../components/layout/header";
+import { THEME } from "../../constants/theme";
 
 type FAQItem = {
   id: number;

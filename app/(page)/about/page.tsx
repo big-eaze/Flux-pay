@@ -7,9 +7,9 @@ import {
   Zap,
   CheckCircle2,
 } from "lucide-react";
-import Header from "../components/layout/header";
-import Footer from "../components/layout/footer";
-import { THEME } from "../constants/theme";
+import Header from "../../components/layout/header";
+import Footer from "../../components/layout/footer";
+import { THEME } from "../../constants/theme";
 
 export default function AboutPage() {
   const ACCENT = THEME.accent;

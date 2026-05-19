@@ -9,8 +9,8 @@ import {
   Shield,
 } from "lucide-react";
 import { useState } from "react";
-import Header from "../components/layout/header";
-import { THEME } from "../constants/theme";
+import Header from "../../components/layout/header";
+import { THEME } from "../../constants/theme";
 
 export default function ContactPage() {
   const ACCENT = THEME.accent;

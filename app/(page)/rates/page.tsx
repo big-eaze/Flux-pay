@@ -10,9 +10,9 @@ import {
   Activity,
   BarChart3,
 } from "lucide-react";
-import Header from "../components/layout/header";
-import { THEME } from "../constants/theme";
-import Footer from "../components/layout/footer";
+import Header from "../../components/layout/header";
+import { THEME } from "../../constants/theme";
+import Footer from "../../components/layout/footer";
 
 export default function RatesPage() {
   const ACCENT = THEME.accent;
