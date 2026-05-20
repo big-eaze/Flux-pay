@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
-  Bitcoin,
   ChevronRight,
   ChevronDown,
   Menu,
@@ -16,11 +16,9 @@ import {
   Shield,
   FileText,
   Mail,
-  HelpCircle,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { THEME } from "../../constants/theme";
-import Image from "next/image";
 
 const mainNav = [
   {
@@ -55,7 +53,7 @@ const companyLinks = [
     label: "Support",
     href: "/support",
     icon: <Headphones className="w-4 h-4" />,
-  }
+  },
 ];
 
 const legalLinks = [
@@ -81,13 +79,15 @@ export default function Header() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [desktopDropdown, setDesktopDropdown] = useState(false);
+
   const [mobileCompanyOpen, setMobileCompanyOpen] = useState(true);
   const [mobileLegalOpen, setMobileLegalOpen] = useState(false);
 
   return (
     <>
+      {/* HEADER */}
       <header
-        className="fixed top-0 left-0 w-full z-50 border-b"
+        className="fixed top-0 left-0 w-full z-[60] border-b"
         style={{
           borderColor: `${ACCENT}15`,
           background: "rgba(10,10,15,0.92)",
@@ -95,26 +95,28 @@ export default function Header() {
         }}
       >
         <div className="max-w-7xl mx-auto px-5 lg:px-10 py-4 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5">
-            <div
-              className="flex items-center justify-center"
-            >
-              <Image
-                src="/fluxPay1.png"
-                alt="Flux Pay"
-                width={40}
-                height={40}
-                className="rounded-lg"
-              />
-            </div>
+          {/* LOGO */}
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/fluxPay1.png"
+              alt="Flux Pay"
+              width={42}
+              height={42}
+              className="rounded-xl"
+            />
 
-            <span className="text-base font-bold tracking-tight">
-              Flux Pay
-            </span>
+            <div className="leading-tight">
+              <p className="font-bold tracking-tight text-white">
+                Flux Pay
+              </p>
+
+              <p className="text-[10px] text-white/35 uppercase tracking-[0.2em]">
+                BTC Checkout
+              </p>
+            </div>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-8">
             {mainNav.map((item) => (
               <Link
@@ -126,13 +128,16 @@ export default function Header() {
               </Link>
             ))}
 
-            {/* Company Dropdown */}
+            {/* COMPANY DROPDOWN */}
             <div className="relative">
               <button
-                onClick={() => setDesktopDropdown((prev) => !prev)}
+                onClick={() =>
+                  setDesktopDropdown((prev) => !prev)
+                }
                 className="flex items-center gap-2 text-sm font-medium text-white/55 hover:text-white transition-colors"
               >
                 Company
+
                 <ChevronDown
                   className={`w-4 h-4 transition-transform ${desktopDropdown ? "rotate-180" : ""
                     }`}
@@ -142,43 +147,98 @@ export default function Header() {
               <AnimatePresence>
                 {desktopDropdown && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                    initial={{
+                      opacity: 0,
+                      y: 8,
+                      scale: 0.98,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      y: 8,
+                      scale: 0.98,
+                    }}
                     transition={{ duration: 0.18 }}
-                    className="absolute top-full right-0 mt-3 w-72 rounded-2xl border border-white/10 bg-[#14141f] p-2"
+                    className="absolute top-full right-0 mt-3 w-72 rounded-2xl border border-white/10 bg-[#14141f] p-2 z-[100]"
                     style={{
-                      boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
+                      boxShadow:
+                        "0 20px 60px rgba(0,0,0,0.45)",
                     }}
                   >
-                    {[...companyLinks].map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/5 transition"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span style={{ color: ACCENT }}>
-                            {item.icon}
-                          </span>
-                          <span className="text-sm text-white/80">
-                            {item.label}
-                          </span>
-                        </div>
+                    {/* COMPANY */}
+                    <div className="mb-2">
+                      <p className="px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-white/30 font-mono">
+                        Company
+                      </p>
 
-                        <ChevronRight
-                          className="w-4 h-4 opacity-30"
-                          style={{ color: ACCENT }}
-                        />
-                      </Link>
-                    ))}
+                      {companyLinks.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/5 transition"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span
+                              style={{ color: ACCENT }}
+                            >
+                              {item.icon}
+                            </span>
+
+                            <span className="text-sm text-white/80">
+                              {item.label}
+                            </span>
+                          </div>
+
+                          <ChevronRight
+                            className="w-4 h-4 opacity-30"
+                            style={{ color: ACCENT }}
+                          />
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* LEGAL */}
+                    <div>
+                      <p className="px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-white/30 font-mono">
+                        Legal
+                      </p>
+
+                      {legalLinks.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/5 transition"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span
+                              style={{ color: ACCENT }}
+                            >
+                              {item.icon}
+                            </span>
+
+                            <span className="text-sm text-white/80">
+                              {item.label}
+                            </span>
+                          </div>
+
+                          <ChevronRight
+                            className="w-4 h-4 opacity-30"
+                            style={{ color: ACCENT }}
+                          />
+                        </Link>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
           </nav>
 
-          {/* Desktop CTA */}
+          {/* DESKTOP CTA */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/transactions"
@@ -189,30 +249,38 @@ export default function Header() {
 
             <Link
               href="/buy-bitcoin"
-              className="px-5 py-2.5 rounded-xl text-sm font-bold text-[#0a0a0f]"
-              style={{ background: ACCENT }}
+              className="px-5 py-2.5 rounded-xl text-sm font-bold text-[#0a0a0f] transition-opacity hover:opacity-85"
+              style={{
+                background: ACCENT,
+              }}
             >
               Buy Bitcoin
             </Link>
           </div>
 
-          {/* Mobile Controls */}
-          <div className="flex md:hidden items-center gap-2.5">
+          {/* MOBILE CONTROLS */}
+          <div className="flex md:hidden items-center gap-2.5 relative z-[90]">
             <Link
               href="/buy-bitcoin"
               className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#0a0a0f]"
-              style={{ background: ACCENT }}
+              style={{
+                background: ACCENT,
+              }}
             >
               Buy
             </Link>
 
             <button
-              onClick={() => setMenuOpen((prev) => !prev)}
-              className="w-9 h-9 rounded-xl border flex items-center justify-center"
+              onClick={() =>
+                setMenuOpen((prev) => !prev)
+              }
+              className="w-10 h-10 rounded-xl border flex items-center justify-center active:scale-95 transition-all"
               style={{
                 borderColor: `${ACCENT}30`,
                 color: ACCENT,
+                background: "rgba(255,255,255,0.02)",
               }}
+              aria-label="Toggle Menu"
             >
               {menuOpen ? (
                 <X className="w-4 h-4" />
@@ -224,20 +292,30 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* MOBILE DRAWER */}
       <AnimatePresence>
         {menuOpen && (
           <>
+            {/* BACKDROP */}
             <motion.div
-              className="fixed inset-0 z-40 md:hidden bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 z-[70] md:hidden"
+              style={{
+                background: "rgba(0,0,0,0.65)",
+                backdropFilter: "blur(4px)",
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
             />
 
+            {/* DRAWER */}
             <motion.div
-              className="fixed top-0 right-0 h-full z-50 md:hidden w-[80vw] max-w-sm bg-[#111118] border-l border-white/10 overflow-y-auto"
+              className="fixed top-0 right-0 h-full z-[80] md:hidden w-[82vw] max-w-sm overflow-y-auto"
+              style={{
+                background: "rgba(14,14,20,0.98)",
+                borderLeft: `1px solid ${ACCENT}15`,
+              }}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -247,32 +325,67 @@ export default function Header() {
                 damping: 30,
               }}
             >
+              {/* HEADER */}
               <div className="p-6 border-b border-white/10">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold">Flux<span className={`text-[${ACCENT}]`}>-Pay</span></span>
-                  <button onClick={() => setMenuOpen(false)}>
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src="/fluxPay1.png"
+                      alt="Flux Pay"
+                      width={36}
+                      height={36}
+                      className="rounded-lg"
+                    />
+
+                    <div>
+                      <p className="font-bold text-white">
+                        Flux Pay
+                      </p>
+
+                      <p className="text-[10px] text-white/35 uppercase tracking-[0.2em]">
+                        BTC Checkout
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    className="w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center"
+                  >
                     <X className="w-5 h-5 text-white/50" />
                   </button>
                 </div>
               </div>
 
-              <div className="p-4 space-y-2">
-                {mainNav.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/5"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span style={{ color: ACCENT }}>{item.icon}</span>
-                      {item.label}
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-white/30" />
-                  </Link>
-                ))}
+              {/* NAV CONTENT */}
+              <div className="p-4 space-y-3">
+                {/* MAIN NAV */}
+                <div className="space-y-1">
+                  {mainNav.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-white/5 transition-all"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          style={{ color: ACCENT }}
+                        >
+                          {item.icon}
+                        </span>
 
-                {/* Company Group */}
+                        <span className="text-sm text-white/80">
+                          {item.label}
+                        </span>
+                      </div>
+
+                      <ChevronRight className="w-4 h-4 text-white/30" />
+                    </Link>
+                  ))}
+                </div>
+
+                {/* COMPANY */}
                 <GroupSection
                   title="Company"
                   open={mobileCompanyOpen}
@@ -282,7 +395,7 @@ export default function Header() {
                   closeMenu={() => setMenuOpen(false)}
                 />
 
-                {/* Legal Group */}
+                {/* LEGAL */}
                 <GroupSection
                   title="Legal"
                   open={mobileLegalOpen}
@@ -291,6 +404,32 @@ export default function Header() {
                   accent={ACCENT}
                   closeMenu={() => setMenuOpen(false)}
                 />
+              </div>
+
+              {/* FOOTER CTA */}
+              <div className="p-5 border-t border-white/10 mt-auto">
+                <Link
+                  href="/buy-bitcoin"
+                  onClick={() => setMenuOpen(false)}
+                  className="w-full flex items-center justify-center py-3.5 rounded-2xl text-sm font-black text-[#0a0a0f]"
+                  style={{
+                    background: ACCENT,
+                  }}
+                >
+                  Buy Bitcoin
+                </Link>
+
+                <Link
+                  href="/transactions"
+                  onClick={() => setMenuOpen(false)}
+                  className="w-full flex items-center justify-center py-3 mt-3 rounded-2xl border border-white/10 text-sm font-semibold text-white/75 hover:bg-white/5 transition-all"
+                >
+                  Track Transaction
+                </Link>
+
+                <p className="text-center text-[10px] text-white/25 font-mono mt-5 tracking-[0.25em]">
+                  FAST • SECURE • BTC DELIVERY
+                </p>
               </div>
             </motion.div>
           </>
@@ -309,12 +448,15 @@ function GroupSection({
   closeMenu,
 }: any) {
   return (
-    <div className="rounded-2xl border border-white/10 overflow-hidden">
+    <div className="rounded-2xl border border-white/10 overflow-hidden bg-[#14141a]">
       <button
         onClick={() => setOpen(!open)}
         className="w-full px-4 py-4 flex items-center justify-between"
       >
-        <span className="font-medium">{title}</span>
+        <span className="font-medium text-white/85">
+          {title}
+        </span>
+
         <ChevronDown
           className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""
             }`}
@@ -335,11 +477,16 @@ function GroupSection({
                 key={item.label}
                 href={item.href}
                 onClick={closeMenu}
-                className="flex items-center justify-between px-4 py-3 border-t border-white/5 hover:bg-white/5"
+                className="flex items-center justify-between px-4 py-3 border-t border-white/5 hover:bg-white/5 transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <span style={{ color: accent }}>{item.icon}</span>
-                  <span className="text-sm">{item.label}</span>
+                  <span style={{ color: accent }}>
+                    {item.icon}
+                  </span>
+
+                  <span className="text-sm text-white/70">
+                    {item.label}
+                  </span>
                 </div>
 
                 <ChevronRight className="w-4 h-4 text-white/30" />
